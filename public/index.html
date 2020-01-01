@@ -1,64 +1,20 @@
-<html><head>
+<html>
+<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Fire Photos</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="googlebot" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <style id="compiled-css" type="text/css">
-      @media (min-width: 992px) {
-        .animate {
-          animation-duration: 0.3s;
-          -webkit-animation-duration: 0.3s;
-          animation-fill-mode: both;
-          -webkit-animation-fill-mode: both;
-        }
-      }
-      
-      @keyframes slideIn {
-        0% {
-          transform: translateY(1rem);
-          opacity: 0;
-        }
-        100% {
-          transform:translateY(0rem);
-          opacity: 1;
-        }
-        0% {
-          transform: translateY(1rem);
-          opacity: 0;
-        }
-      }
-      
-      @-webkit-keyframes slideIn {
-        0% {
-          -webkit-transform: transform;
-          -webkit-opacity: 0;
-        }
-        100% {
-          -webkit-transform: translateY(0);
-          -webkit-opacity: 1;
-        }
-        0% {
-          -webkit-transform: translateY(1rem);
-          -webkit-opacity: 0;
-        }
-      }
-      
-      .slideIn {
-        -webkit-animation-name: slideIn;
-        animation-name: slideIn;
-      }
-      
-      body {
-        background: #007bff;
-        background: linear-gradient(to right, #0062E6, #33AEFF);
-      }
-
-      .carousel-item {
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+    <script src="/config.js"></script>
+    <script src="/auth.js"></script>
+    <style type="text/css">
+        .carousel-item {
         height: 65vh;
         min-height: 350px;
         background: no-repeat center center scroll;
@@ -66,79 +22,139 @@
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-      }
-  </style>
-  </head>
-  <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="#">Fire Photos</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <a class="navbar-brand" href="#">Fire Photos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
   
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" id="user-menu"></li>
+            </ul>
+        </div>
     </div>
-  </nav>
-  <header>
+</nav>
+<header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-        <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/RCAhiGJsUUE/1920x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3 class="display-4">First Slide</h3>
-            <p class="lead">This is a description for the first slide.</p>
-          </div>
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/RCAhiGJsUUE/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="display-4">Foto</h3>
+                    <p class="lead">Essa foi umas das fotos mais visualizadas.</p>
+                </div>
+            </div>
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="display-4">Foto</h3>
+                    <p class="lead">Essa foi umas das fotos mais visualizadas.</p>
+                </div>
+            </div>
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/O7fzqFEfLlo/1920x1080')">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="display-4">Foto</h3>
+                    <p class="lead">Essa foi umas das fotos mais visualizadas.</p>
+                </div>
+            </div>
         </div>
-        <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1920x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3 class="display-4">Second Slide</h3>
-            <p class="lead">This is a description for the second slide.</p>
-          </div>
-        </div>
-        <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('https://source.unsplash.com/O7fzqFEfLlo/1920x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3 class="display-4">Third Slide</h3>
-            <p class="lead">This is a description for the third slide.</p>
-          </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
-          </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
-          </a>
+        </a>
     </div>
-  </header>
-  <div class="container text-center">
-    <h1 class="mt-5 text-white font-weight-light">Animated Bootstrap Navbar Dropdowns</h1>
-    <p class="lead text-white-50">An attractive yet subtle dropdown animation for dropdown menus loacated within a Bootstrap navbar</p>
-  </div>
-  </body></html>
+</header>
+<div class="container">
+
+    <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Postagens recentes</h1>
+  
+    <hr class="mt-2 mb-5">
+  
+    <div class="row text-center text-lg-left">
+  
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/sesveuG_rNo/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/AvhMzHwiE_0/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/2gYsZUmockw/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EMSDtjVHdQ8/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/8mUEy0ABdNE/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/G9Rfc1qccH4/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aJeH0KcFkuc/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6">
+            <a href="#" class="d-block mb-4 ">
+                <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" alt="">
+            </a>
+        </div>
+    </div>
+  
+</div>
+<footer class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+        <small>&copy; Copyright by Johendz | Fire Photos é um <a target="_blank" href="https://github.com/johnendz/Firebase-Photography-Example-master" style="color: rgba(255,255,255,.5)!important;">Projeto de Código Aberto</a></small>
+    </div>
+</footer>
+</body>
+</html>
