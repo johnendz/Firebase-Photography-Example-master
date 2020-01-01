@@ -8,9 +8,10 @@ $( document ).ready(function() {
             return decodeURI(results[1]) || 0;
         }
     }
-    if($.urlParam('id') == null){
-        $("body").css("background", "url('http://placehold.it/1920x1080') no-repeat center center fixed");
+    if($.urlParam('user') == null || $.urlParam('id') == null){
+        window.location.href = "/";
     }else{
-        $("body").css('background', 'url(' + $.urlParam('id') + ') no-repeat center center fixed');
+        window.location.href = "/";
+        //$("body").css('background', 'url(' + $.urlParam('id') + ') no-repeat center center fixed');
     }
 });

@@ -15,15 +15,73 @@
     <script src="/auth.js"></script>
     <style type="text/css">
         .carousel-item {
-        height: 65vh;
-        min-height: 350px;
-        background: no-repeat center center scroll;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
+            height: 65vh;
+            min-height: 350px;
+            background: no-repeat center center scroll;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+    <style type="text/css">
+        :root {
+        --input-padding-x: 1.5rem;
+        --input-padding-y: .75rem;
+        }
+
+
+        .card-signin {
+        border: 0;
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        }
+
+        .card-signin .card-title {
+        margin-bottom: 2rem;
+        font-weight: 300;
+        font-size: 1.5rem;
+        }
+
+        .card-signin .card-body {
+        padding: 2rem;
+        background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
         background-size: cover;
-    }
-</style>
+        }
+
+        .form-signin {
+        width: 100%;
+        }
+
+        .form-signin .btn {
+        font-size: 80%;
+        border-radius: 5rem;
+        letter-spacing: .1rem;
+        font-weight: bold;
+        padding: 1rem;
+        transition: all 0.2s;
+        }
+
+        .form-label-group {
+        position: relative;
+        margin-bottom: 1rem;
+        }
+
+        .form-label-group input {
+        height: auto;
+        border-radius: 2rem;
+        }
+
+        .btn-github {
+        color: white;
+        background-color: #444;
+        }
+        .btn-github:hover {
+        color: #444;
+        background-color: white;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,7 +94,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="user-menu-off" style="display:none;">
-                    <a href="/login" class="btn btn-outline-dark">Iniciar sessão <i class="far fa-user" style="font-size: 15px;"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-outline-dark" data-toggle="modal" data-target="#login">Iniciar sessão <i class="far fa-user" style="font-size: 15px;"></i></a>
                 </li>
                 <li class="nav-item" id="user-menu-on" style="display:none;">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="user-menu-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
@@ -100,62 +158,62 @@
     <div class="row text-center text-lg-left">
   
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="/photo/?id=https://source.unsplash.com/wfh8dDlNFOk/1920x1080" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/sesveuG_rNo/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/AvhMzHwiE_0/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/2gYsZUmockw/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EMSDtjVHdQ8/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/8mUEy0ABdNE/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/G9Rfc1qccH4/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aJeH0KcFkuc/400x300" alt="">
             </a>
         </div>
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?user=9545954562251&id=564584545151548" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" alt="">
             </a>
         </div>
@@ -167,5 +225,80 @@
         <small>&copy; Copyright by Johendz | Fire Photos é um <a target="_blank" href="https://github.com/johnendz/Firebase-Photography-Example-master" style="color: rgba(255,255,255,.5)!important;">Projeto de Código Aberto</a></small>
     </div>
 </footer>
+<script>
+$( document ).ready(function() {
+    $('#createpassword').keyup(function(e) {
+                var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+                var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+                var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+                if (false == enoughRegex.test($(this).val())) {
+                    $("#createpassword").addClass("is-invalid");
+                    $("#createpassword").removeClass("is-valid");
+                } else if (strongRegex.test($(this).val())) {
+                    $("#createpassword").addClass("is-valid");
+                    $("#createpassword").removeClass("is-invalid");
+                } else if (mediumRegex.test($(this).val())) {
+                    $("#createpassword").addClass("is-invalid");
+                    $("#createpassword").removeClass("is-valid");
+                } else {
+                    $("#createpassword").addClass("is-invalid");
+                    $("#createpassword").removeClass("is-valid");
+                }
+                return true;
+            });
+            $("#createemail").keyup(function() {
+                var email = $("#createemail").val();
+                var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (!filter.test(email)) {
+                    $("#createemail").addClass("is-invalid");
+                    $("#createemail").removeClass("is-valid");
+                } else {
+                    $("#createemail").addClass("is-valid");
+                    $("#createemail").removeClass("is-invalid");
+                }
+            });
+});
+</script>
+<div class="modal" id="register" tabindex="-1" role="dialog" aria-hidden="true" style="margin-left: 31%;margin-top: 10%;">
+    <div class="card card-signin flex-row my-5" style="width: 35%;">
+        <div class="card-body">
+          <h5 class="card-title text-center" style="color:white;">Criar uma Conta</h5>
+          <div class="form-signin">
+            <div class="form-label-group">
+              <input type="text" id="usergithub" class="form-control" placeholder="GitHub Username" required autofocus>
+            </div>
+
+            <div class="form-label-group">
+              <input type="email" id="createemail" class="form-control" placeholder="Endereço de E-mail" required>
+            </div>
+
+            <div class="form-label-group">
+              <input type="password" id="createpassword" class="form-control" placeholder="Senha de Acesso" required>
+            </div>
+
+            <button class="btn btn-lg btn-github btn-block text-uppercase"><i class="fab fa-github"></i> Cadastrar com GitHub User</button>
+        </div>
+        </div>
+      </div>
+</div>
+<div class="modal" id="login" tabindex="-1" role="dialog" aria-hidden="true" style="margin-left: 31%;margin-top: 10%;">
+    <div class="card card-signin flex-row my-5" style="width: 35%;">
+        <div class="card-body">
+          <h5 class="card-title text-center" style="color:white;">Acessar uma Conta</h5>
+          <div class="form-signin">
+            <div class="form-label-group">
+              <input type="email" id="email" class="form-control" placeholder="Endereço de E-mail" required>
+            </div>
+
+            <div class="form-label-group">
+              <input type="password" id="password" class="form-control" placeholder="Senha de Acesso" required>
+            </div>
+
+            <button class="btn btn-lg btn-github btn-block text-uppercase"><i class="fab fa-github"></i> Conectar com GitHub User</button>
+            <a class="d-block text-center mt-2 small" href="javascript:void(0);" data-toggle="modal" data-target="#register" style="color:white;" onclick="$('#login').modal('hide');">Criar uma Conta</a>
+        </div>
+        </div>
+      </div>
+</div>
 </body>
 </html>
