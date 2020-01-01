@@ -28,14 +28,25 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Fire Photos</a>
+        <a class="navbar-brand" href="/">Fire Photos</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
   
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item" id="user-menu"></li>
+                <li class="nav-item" id="user-menu-off" style="display:none;">
+                    <a href="/login" class="btn btn-outline-dark">Iniciar sessão <i class="far fa-user" style="font-size: 15px;"></i></a>
+                </li>
+                <li class="nav-item" id="user-menu-on" style="display:none;">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="user-menu-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                    <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="user-menu-dropdown">
+                      <a class="dropdown-item" href="#">Meu Dashboard</a>
+                      <a class="dropdown-item" href="#">Meu Perfil</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" onclick="firebase.auth().signOut().then(function() {});">Deslogar</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -89,7 +100,7 @@
     <div class="row text-center text-lg-left">
   
         <div class="col-lg-3 col-md-4 col-6">
-            <a href="#" class="d-block mb-4 ">
+            <a href="/photo/?id=https://source.unsplash.com/wfh8dDlNFOk/1920x1080" class="d-block mb-4 ">
                 <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="">
             </a>
         </div>
