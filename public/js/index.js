@@ -22,7 +22,7 @@ $( document ).ready(function() {
             postcont++;
             $("#listphotos").append("<div class='col-lg-3 col-md-4 col-6'><a href='/photo/?id=" + doc.id + "' class='d-block mb-4'><img class='img-fluid img-thumbnail' src='" + doc.data().src + "'></a></div>");//doc.data().src onde ".src" seria o nome do campo e "doc.data()" é usado para ver os dados retornado
         });
-        if(postcont < "11"){
+        if(postcont <= "11"){
             $("#avs1").show();
             $("#avs2").show();
         }
