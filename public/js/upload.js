@@ -2,11 +2,21 @@ $(document).ready(function() {
     var readURL = function(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-
             reader.onload = function (e) {
+                var image = new Image();
+                image.src = reader.result;
+                image.onload = function() {
+                    console.log(image.width);
+                    if(image.width < "1920" && image.height < "1080"){
+                        $("#add").text("Sua fotógrafia precisa ter no minimo 1920x1080.");
+                        $("#add").prop('disabled', true);
+                    }else{
+                        $("#add").text("Adicionar");
+                        $("#add").prop('disabled', false);
+                    }
+                };
                 $('.profile-pic').attr('src', e.target.result);
             }
-    
             reader.readAsDataURL(input.files[0]);
         }
     }//ler imagem selecionada
@@ -36,7 +46,7 @@ $(document).ready(function() {
 			ctx.canvas.width = image.width;
 			ctx.canvas.height = image.height;
 			ctx.drawImage(image, 0, 0,image.width,image.height);
-			var compress = canvas.toDataURL('image/jpeg', 0.6);
+			var compress = canvas.toDataURL('image/jpeg', 0.4);
 			var imgfile = dataURLtoBlob(compress);//para executar a funcao e ver tamanho
 			var size = imgfile.size;//definir uma variavel com o tamanho
 			upload(docid, compress, size);//executar funcao para enviar imagem
@@ -45,7 +55,8 @@ $(document).ready(function() {
 		$("#add").text("Comprimindo...");
 	}//compremir a fotografia
 	function upload(docid, compress, size) {
-        var uploadTask = storage.ref().child('/user/' + user.uid + '/' + docid + '.jpg').putString(compress, 'data_url');
+        var user = firebase.auth().currentUser;
+        var uploadTask = storage.ref().child('' + user.uid + '/' + docid + '.jpg').putString(compress, 'data_url');
         uploadTask.on('state_changed', function(snapshot){
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;//fazer uma conta e retornar a porcentagem ex: 100.545415416125
 		    var textprogress = progress.toFixed(0);//selecionar somente os primeiros numeros ex: 100
