@@ -11,19 +11,10 @@
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
-    <script src="/config.js"></script>
-    <script src="/auth.js"></script>
-    <script src="/profile.js"></script>
-    <style type="text/css">
-        .btn-github {
-        color: white;
-        background-color: #444;
-        }
-        .btn-github:hover {
-        color: #444;
-        background-color: white;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/style.css"><!--estilo do projeto-->
+    <script src="/config.js"></script><!--configuracao do firebase-->
+    <script src="/auth.js"></script><!--funcoes para gerenciamento de usuarios-->
+    <script src="/js/profile.js"></script><!--funcoes da pagina profile-->
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,16 +27,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="user-menu-off" style="display:none;">
-                    <button id="conect" class="btn btn-github"><i class="fab fa-github"></i> <btnlogin>Conectar com GitHub</btnlogin></button>
+                    <button id="conect" class="btn btn-github"><i class="fab fa-github"></i> <btnlogin>Conectar com GitHub</btnlogin></button><!--essa funcao esta no auth.js-->
                 </li>
                 <li class="nav-item" id="user-menu-on" style="display:none;">
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="user-menu-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                         <div class="dropdown-menu" aria-labelledby="user-menu-dropdown">
                             <a class="dropdown-item" href="/upload">Enviar Fotógrafia</a>
-                            <a class="dropdown-item" id="myprofile">Meu Perfil</a>
+                            <a class="dropdown-item" id="myprofile">Meu Perfil</a><!--essa informacao vem do auth.js-->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" onclick="firebase.auth().signOut().then(function() {});">Deslogar</a>
+                            <a class="dropdown-item" onclick="firebase.auth().signOut().then(function() {});">Deslogar</a><!--para deslogar usuario do site-->
                         </div>
                     </div>
                 </li>
@@ -54,21 +45,20 @@
     </div>
 </nav>
 <div class="container">
-
-    <!-- Portfolio Item Heading -->
-    <h1 id="username" class="my-4"></small>
-    </h1>
-  
-    <!-- Portfolio Item Row -->
+  <div id="loader"><!--div do carregamento da pagina-->
+    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  </div>
+  <div id="displayprofile" style="display:none;">
+    <h1 id="username" class="my-4"></h1><!--mostrar username e nome do github-->
     <div class="row">
   
       <div class="col-md-5">
-        <img id="userphoto" class="img-fluid">
+        <img id="userphoto" class="img-fluid"><!--mostrar foto do github-->
       </div>
   
       <div class="col-md-7">
         <h3 class="my-3">Bio</h3>
-        <p id="bio"></p>
+        <p id="bio"></p><!--mostrar bio do github-->
         <h3 class="my-3">Info</h3>
         <ul>
           <li id="company">Nenhuma empresa definida.</li>
@@ -79,37 +69,15 @@
       </div>
   
     </div>
-    <!-- /.row -->
-  
-    <!-- Related Projects Row -->
     <h3 class="my-4">Fotógrafias Publicadas</h3>
-  
-    <div class="row">
-  
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="javascript:void(0);">
-              <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
+    <div class="row" id="listphotos">
+      <div class="card text-white bg-secondary my-5 py-4 text-center">
+        <div class="card-body">
+          <p class="text-white m-0">Este usuario ainda não publicou nenhum de seus trabalhos fotógraficos em nosso site!</p>
+        </div>
       </div>
-  
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="javascript:void(0);">
-              <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
-      </div>
-  
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="javascript:void(0);">
-              <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
-      </div>
-  
-      <div class="col-md-3 col-sm-6 mb-4">
-        <a href="javascript:void(0);">
-              <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
-      </div>
-    </div>
+    </div><!--div para mostrar lista de fotos publicadas-->
+  </div>
   </div>
 <footer class="py-4 bg-dark text-white-50">
     <div class="container text-center">

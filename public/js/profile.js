@@ -7,18 +7,18 @@ $( document ).ready(function() {
         else{
             return decodeURI(results[1]) || 0;
         }
-    }
-    let user = $.urlParam('user');
+    }// essa funcao serve apenas para ler os parametros na barra de endereco "?id=89789798"
+    let user = $.urlParam('user');//para pegar o conteudo do ?user=
     if(user == null){
         window.location.href = "/";
     }else{
         db.collection("users").doc(user).get().then(function(doc) {
-            if (doc.exists) {
+            if (doc.exists) {// vereficar se o usuario existe no banco de dados
                 let useruid = doc.data().username;
+                //buscar da api do github informações do ususario
                 fetch(`https://api.github.com/users/${useruid}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data.login)
                         $("#username").html(data.login + " <small>(" + data.name + ")</small>");
                         $("#userphoto").attr("src", data.avatar_url);
                         let bio = data.bio;
@@ -42,7 +42,20 @@ $( document ).ready(function() {
                             $("#email").html("<a href='mailto:" + data.email + "'>Enviar Email</a>");
                         }                
                     })
-                    .catch(error => window.location.href = "/")
+                    .catch(error => window.location.href = "/");
+                //mostrar as fotos dos ususarios
+                db.collection("photos").where("user", "==", user).get().then(function(querySnapshot) {//buscar todas as fotos com campo user igual do usuario a ser buscado
+                    querySnapshot.forEach(function(doc) {
+                        $("#listphotos").html("");//redefinir toda vez que um dado for adicionado no banco de dados
+                        $("#listphotos").append("<div class='col-md-3 col-sm-6 mb-4'><a href='/photo/?id=" + doc.id + "'><img class='img-fluid' src='" + doc.data().src + "'></a></div>");//doc.data().src onde ".src" seria o nome do campo e "doc.data()" é usado para ver os dados retornado
+                    });
+                    //ocultar tela de carregamento e mostrar perfil
+                    $("#loader").hide();
+                    $("#displayprofile").show();
+                })
+                .catch(function(error) {
+                    console.log("Error getting documents: ", error);
+                });
             } else {
                 window.location.href = "/";
             }

@@ -1,15 +1,15 @@
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-        console.log("User is signed in.");
-        $("#user-menu-on").show();
-        $("#user-menu-off").hide();
-        $("#user-menu-dropdown").text(user.displayName);
-        $("#myprofile").attr("href", "/profile/?user=" + user.uid);
-        console.log(user);
+        console.log("Usuario logado.");
+        $("#user-menu-on").show();//mostrar menu de usuario logado
+        $("#user-menu-off").hide();//ocultar menu de usuario deslogado
+        $("#user-menu-dropdown").text(user.displayName);//inserir texto com nome do github (o nome ja vem por termos usado o provedor github)
+        $("#myprofile").attr("href", "/profile/?user=" + user.uid);//para colocar o link com uid do usuario no menu
+        console.log(user);//mostrar informacoes da sessao
     } else {
-        console.log("No user is signed in.");
-        $("#user-menu-off").show();
-        $("#user-menu-on").hide();
+        console.log("Usuario deslogado.");
+        $("#user-menu-off").show();//mostrar menu de usuario deslogado
+        $("#user-menu-on").hide();//ocultar menu de usuario logado
     }
 });
 $( document ).ready(function() {
@@ -18,14 +18,13 @@ $( document ).ready(function() {
         $("btnlogin").text("Acessando...");
         $("#conect").prop('disabled', true);
         firebase.auth().signInWithPopup(provider).then(function(result) {
-            var token = result.credential.accessToken;
-            var user = result.user;
-            console.log(result.user);
+            var token = result.credential.accessToken;//github token
         }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             var email = error.email;
             var credential = error.credential;
+            console.log(error);
             $("#conect").addClass("btn-danger");$("#conect").removeClass("btn-primary");
 			$("btnlogin").text(errorMessage);
 			setTimeout(function(){
