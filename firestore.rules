@@ -7,7 +7,9 @@ service cloud.firestore {
       allow read;
     }
     match /photos/{id} {
-      allow delete, create: if request.auth.uid == resource.data.user;
+     	allow create: if request.auth.uid != null;
+      allow delete: if request.auth.uid == resource.data.user;
+      allow update: if request.auth.uid == resource.data.user;
       allow read;
     }
     match /views/{id} {

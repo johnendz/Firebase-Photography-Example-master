@@ -18,7 +18,7 @@ $( document ).ready(function() {
         $("btnlogin").text("Acessando...");
         $("#conect").prop('disabled', true);
         firebase.auth().signInWithPopup(provider).then(function(result) {
-            var token = result.credential.accessToken;//github token
+            var token = result.credential.accessToken;//GitHub OAuth Access Token
         }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;

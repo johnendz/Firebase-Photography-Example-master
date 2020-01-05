@@ -11,9 +11,10 @@
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
-    <script src="/config.js"></script>
-    <script src="/auth.js"></script>
-    <script src="/upload.js"></script>
+    <link rel="stylesheet" type="text/css" href="/style.css"><!--estilo do projeto-->
+    <script src="/config.js"></script><!--configuracao do firebase-->
+    <script src="/auth.js"></script><!--funcoes para gerenciamento de usuarios-->
+    <script src="/js/upload.js"></script><!--funcoes da pagina upload-->
     <style type="text/css">
         header {
         padding: 156px 0 100px;
@@ -22,16 +23,58 @@
         section {
         padding: 150px 0;
         }
-    </style>
-    <style type="text/css">
-        .btn-github {
-        color: white;
-        background-color: #444;
-        }
-        .btn-github:hover {
-        color: #444;
-        background-color: white;
-        }
+        .avatar-wrapper {
+	 position: relative;
+	 height: 200px;
+	 width: 200px;
+	 margin: 50px auto;
+	 border-radius: 50%;
+	 overflow: hidden;
+	 box-shadow: 1px 1px 15px -5px black;
+	 transition: all 0.3s ease;
+}
+ .avatar-wrapper:hover {
+	 transform: scale(1.05);
+	 cursor: pointer;
+}
+ .avatar-wrapper:hover .profile-pic {
+	 opacity: 0.5;
+}
+ .avatar-wrapper .profile-pic {
+	 height: 100%;
+	 width: 100%;
+	 transition: all 0.3s ease;
+}
+ .avatar-wrapper .profile-pic:after {
+	 font-family: FontAwesome;
+	 content: "\f007";
+	 top: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100%;
+	 position: absolute;
+	 font-size: 190px;
+	 background: #ecf0f1;
+	 color: #34495e;
+	 text-align: center;
+}
+ .avatar-wrapper .upload-button {
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 height: 100%;
+	 width: 100%;
+}
+ .avatar-wrapper .upload-button .fa-arrow-circle-up {
+	 position: absolute;
+	 font-size: 234px;
+	 top: -17px;
+	 left: -13px;
+	 text-align: center;
+	 transition: all 0.3s ease;
+     color: #34495e;
+     opacity: 0.9;
+} 
     </style>
 </head>
 <body>
@@ -45,16 +88,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" id="user-menu-off" style="display:none;">
-                    <button id="conect" class="btn btn-github"><i class="fab fa-github"></i> <btnlogin>Conectar com GitHub</btnlogin></button>
+                    <button id="conect" class="btn btn-github"><i class="fab fa-github"></i> <btnlogin>Conectar com GitHub</btnlogin></button><!--essa funcao esta no auth.js-->
                 </li>
                 <li class="nav-item" id="user-menu-on" style="display:none;">
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="user-menu-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                         <div class="dropdown-menu" aria-labelledby="user-menu-dropdown">
                             <a class="dropdown-item" href="/upload">Enviar Fotógrafia</a>
-                            <a class="dropdown-item" id="myprofile">Meu Perfil</a>
+                            <a class="dropdown-item" id="myprofile">Meu Perfil</a><!--essa informacao vem do auth.js-->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" onclick="firebase.auth().signOut().then(function() {});">Deslogar</a>
+                            <a class="dropdown-item" onclick="firebase.auth().signOut().then(function() {});">Deslogar</a><!--para deslogar usuario do site-->
                         </div>
                     </div>
                 </li>
@@ -72,18 +115,26 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <h2>About this page</h2>
-          <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so you can use it as a boilerplate or starting point for you own landing page designs! This template features:</p>
-          <ul>
-            <li>Clickable nav links that smooth scroll to page sections</li>
-            <li>Responsive behavior when clicking nav links perfect for a one page website</li>
-            <li>Bootstrap's scrollspy feature which highlights which section of the page you're on in the navbar</li>
-            <li>Minimal custom CSS so you are free to explore your own unique design options</li>
-          </ul>
+            <div class="container-fluid">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active">Publicar nova fotografia</li>
+                </ol>
+                <div class="form-group">
+                    <div class="avatar-wrapper">
+                        <img class="profile-pic" src="" />
+                        <div class="upload-button">
+                            <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                        </div>
+                        <input class="file-upload" type="file" id="imagem" accept="image/*"/>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg btn-block" id="add">Adicionar</button>
+            </div>
         </div>
       </div>
     </div>
-  </section>
+</section>
+<canvas id="canvas" style="display: none;"></canvas>
 <footer class="py-4 bg-dark text-white-50">
     <div class="container text-center">
         <small>&copy; Copyright by Johnendz | Fire Photos é um <a target="_blank" href="https://github.com/johnendz/Firebase-Photography-Example-master" style="color: rgba(255,255,255,.5)!important;">Projeto de Código Aberto</a></small>
