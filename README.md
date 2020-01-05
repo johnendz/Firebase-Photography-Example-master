@@ -17,4 +17,4 @@ Tecnologias e Frameworks usados são
 * [Cloud Firestore](https://firebase.google.com/docs/firestore/quickstart) para adicionar dados e ver os dados adicionados.
 * [Cloud Storage](https://firebase.google.com/docs/storage/web/start) para armazenamento das imagens com alta disponibilidade.
 * [Bootstrap](https://getbootstrap.com.br) para permitir um projeto responsivo para dispositivos na web.
-> O projeto teve um duração de 4 dias, começando em 1 de janeiro de 2020 e finalizado em 5 de janeiro de 2020.
+> O projeto teve um duração de 4 dias, começando em 2 de janeiro de 2020 e finalizado em 5 de janeiro de 2020.
