@@ -22,32 +22,32 @@ $( document ).ready(function() {
                 }
                 //buscar da api do github informações do ususario
                 fetch(`https://api.github.com/users/${useruid}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        $("#username").html(data.login + " <small>(" + name + ")</small>");
-                        $("#userphoto").attr("src", data.avatar_url);
-                        let bio = data.bio;
-                        let company = data.company;
-                        let location = data.location;
-                        let blog = data.blog;
-                        let email = data.email;
-                        if(bio != null){
-                            $("#bio").text(data.bio);
-                        }
-                        if(company != null){
-                            $("#company").text(data.company);
-                        }
-                        if(location != null){
-                            $("#location").text(data.location);
-                        }
-                        if(blog != null){
-                            $("#blog").html("<a href='" + data.blog + "'>Meu Site</a>");
-                        }
-                        if(email != null){
-                            $("#email").html("<a href='mailto:" + data.email + "'>Enviar Email</a>");
-                        }                
-                    })
-                    .catch(error => window.location.href = "/");
+                .then(response => response.json())
+                .then(data => {
+                    $("#username").html(data.login + " <small>(" + name + ")</small>");
+                    $("#userphoto").attr("src", data.avatar_url);
+                    let bio = data.bio;
+                    let company = data.company;
+                    let location = data.location;
+                    let blog = data.blog;
+                    let email = data.email;
+                    if(bio != null){
+                        $("#bio").text(data.bio);
+                    }
+                    if(company != null){
+                        $("#company").text(data.company);
+                    }
+                    if(location != null){
+                        $("#location").text(data.location);
+                    }
+                    if(blog != null){
+                        $("#blog").html("<a href='" + data.blog + "'>Meu Site</a>");
+                    }
+                    if(email != null){
+                        $("#email").html("<a href='mailto:" + data.email + "'>Enviar Email</a>");
+                    }                
+                })
+                .catch(error => window.location.href = "/");
                 //mostrar as fotos dos ususarios
                 db.collection("photos").where("user", "==", user).get().then(function(querySnapshot) {//buscar todas as fotos com campo user igual do usuario a ser buscado
                     $("#listphotos").html("");//redefinir toda vez que um dado for adicionado no banco de dados

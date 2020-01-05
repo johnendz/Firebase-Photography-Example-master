@@ -16,7 +16,7 @@ $(document).ready(function() {
     });//detectar uma mudanca no input file
     
     $(".upload-button").on('click', function() {
-       $(".file-upload").click();
+        $(".file-upload").click();
 	});// ao clicar na seta pressionar o input file
 	
 	function dataURLtoBlob(dataURL) {

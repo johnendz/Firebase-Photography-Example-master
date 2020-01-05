@@ -28,7 +28,7 @@ $( document ).ready(function() {
                 }
             })
             .then(res => res.json())
-                .then(res => {
+            .then(res => {
                 db.collection("users").doc(user.uid).get().then(function(doc) {
                     if (doc.exists) {
                         db.collection("users").doc(user.uid).update({
