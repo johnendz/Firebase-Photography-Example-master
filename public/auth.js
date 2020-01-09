@@ -1,76 +1,67 @@
-$( document ).ready(function() {
-    $.urlParam = function(name){
-        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-        if (results==null){
-            return null;
-        }
-        else{
-            return decodeURI(results[1]) || 0;
-        }
-    }// essa funcao serve apenas para ler os parametros na barra de endereco "?id=89789798"
-    let user = $.urlParam('user');//para pegar o conteudo do ?user=
-    if(user == null){
-        window.location.href = "/";
-    }else{
-        db.collection("users").doc(user).get().then(function(doc) {
-            if (doc.exists) {// vereficar se o usuario existe no banco de dados
-                let useruid = doc.data().username;
-                if(doc.data().name == null){
-                    var name = "desconhecido";
-                }else{
-                    var name = doc.data().name;
-                }
-                //buscar da api do github informações do ususario
-                fetch(`https://api.github.com/users/${useruid}`)
-                .then(response => response.json())
-                .then(data => {
-                    $("#username").html(data.login + " <small>(" + name + ")</small>");
-                    $("#userphoto").attr("src", data.avatar_url);
-                    let bio = data.bio;
-                    let company = data.company;
-                    let location = data.location;
-                    let blog = data.blog;
-                    let email = data.email;
-                    if(bio != null){
-                        $("#bio").text(data.bio);
-                    }
-                    if(company != null){
-                        $("#company").text(data.company);
-                    }
-                    if(location != null){
-                        $("#location").text(data.location);
-                    }
-                    if(blog != null){
-                        $("#blog").html("<a href='" + data.blog + "'>Meu Site</a>");
-                    }
-                    if(email != null){
-                        $("#email").html("<a href='mailto:" + data.email + "'>Enviar Email</a>");
-                    }                
-                })
-                .catch(error => window.location.href = "/");
-                //mostrar as fotos dos ususarios
-                db.collection("photos").where("user", "==", user).get().then(function(querySnapshot) {//buscar todas as fotos com campo user igual do usuario a ser buscado
-                    var postcont = 0;
-                    $("#listphotos").html("");//redefinir toda vez que um dado for adicionado no banco de dados
-                    querySnapshot.forEach(function(doc) {
-                        postcont++;
-                        $("#listphotos").append("<div class='col-md-3 col-sm-6 mb-4'><a href='/photo/?id=" + doc.id + "'><img class='img-fluid' src='" + doc.data().src + "'></a></div>");//doc.data().src onde ".src" seria o nome do campo e "doc.data()" é usado para ver os dados retornado
-                    });
-                    //ocultar tela de carregamento e mostrar perfil
-                    if(postcont != null){
-                        $(".showimgs").hide();
-                    }
-                    $("#loader").hide();
-                    $("#displayprofile").show();
-                })
-                .catch(function(error) {
-                    console.log("Error getting documents: ", error);
-                });
-            } else {
-                window.location.href = "/";
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        console.log("Usuario logado.");
+        $("#user-menu-on").show();//mostrar menu de usuario logado
+        $("#user-menu-off").hide();//ocultar menu de usuario deslogado
+        $("#user-menu-dropdown").text(user.displayName);//inserir texto com nome do github (o nome ja vem por termos usado o provedor github)
+        $("#myprofile").attr("href", "/profile/?user=" + user.uid);//para colocar o link com uid do usuario no menu
+        console.log(user);//mostrar informacoes da sessao
+    } else {
+        console.log("Usuario deslogado.");
+        $("#conect").addClass("btn-primary");$("#conect").removeClass("btn-danger");$("btnlogin").text("Conectar com GitHub");$("#conect").prop('disabled', false);
+        $("#user-menu-off").show();//mostrar menu de usuario deslogado
+        $("#user-menu-on").hide();//ocultar menu de usuario logado
     }
+});
+$( document ).ready(function() {
+    var provider = new firebase.auth.GithubAuthProvider();
+    $("#conect").click(function() {
+        $("btnlogin").text("Acessando...");
+        $("#conect").prop('disabled', true);
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+            let token = result.credential.accessToken;//GitHub OAuth Access Token
+            let user = result.user;
+            //usando o token para puxar informacoes do usuario do github
+            fetch('https:////api.github.com/user', {
+                headers: {
+                    Authorization: 'token ' + token
+                }
+            })
+            .then(res => res.json())
+            .then(res => {
+                db.collection("users").doc(user.uid).get().then(function(doc) {
+                    if (doc.exists) {
+                        db.collection("users").doc(user.uid).update({
+                            logindate: Date.now(),
+                            name: res.name,
+                            username: res.login
+                        });//em caso do usuario trocar de username, atualiza toda vez que fizer login
+                    } else {
+                        db.collection("users").doc(user.uid).set({
+                            id: user.uid,
+                            src: user.photoURL,
+                            registration: Date.now(),
+                            logindate: Date.now(),
+                            name: res.name,
+                            username: res.login
+                        });//defenir um a primeira view já que ela nao existe
+                    }
+                }).catch(function(error) {
+                    console.log("Error getting document:", error);
+                });
+            });            
+        }).catch(function(error) {
+            //var errorCode = error.code;
+            //var errorMessage = error.message;
+            //var email = error.email;
+            //var credential = error.credential;
+            //apenas se voce quiser separar os erros
+            console.log(error);
+            $("#conect").addClass("btn-danger");$("#conect").removeClass("btn-primary");
+			$("btnlogin").text(errorMessage);
+			setTimeout(function(){
+				$("#conect").addClass("btn-primary");$("#conect").removeClass("btn-danger");$("btnlogin").text("Conectar com GitHub");$("#conect").prop('disabled', false);
+			}, 3000);
+        });
+    });
 });
