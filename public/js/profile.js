@@ -50,11 +50,16 @@ $( document ).ready(function() {
                 .catch(error => window.location.href = "/");
                 //mostrar as fotos dos ususarios
                 db.collection("photos").where("user", "==", user).get().then(function(querySnapshot) {//buscar todas as fotos com campo user igual do usuario a ser buscado
+                    var postcont = 0;
                     $("#listphotos").html("");//redefinir toda vez que um dado for adicionado no banco de dados
                     querySnapshot.forEach(function(doc) {
+                        postcont++;
                         $("#listphotos").append("<div class='col-md-3 col-sm-6 mb-4'><a href='/photo/?id=" + doc.id + "'><img class='img-fluid' src='" + doc.data().src + "'></a></div>");//doc.data().src onde ".src" seria o nome do campo e "doc.data()" é usado para ver os dados retornado
                     });
                     //ocultar tela de carregamento e mostrar perfil
+                    if(postcont != null){
+                        $(".showimgs").hide();
+                    }
                     $("#loader").hide();
                     $("#displayprofile").show();
                 })
