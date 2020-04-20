@@ -6,19 +6,19 @@
   🚀 Firebase Photography Example
 </h4>
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/johnendz/Firebase-Photography-Example">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/johnendz/Firebase-Photography-Example?color=yellow">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/johnendz/Firebase-Photography-Example">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/johnendz/Firebase-Photography-Example?color=yellow">
   
   <a href="https://github.com/johnendz/Firebase-Photography-Example/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/johnendz/Firebase-Photography-Example">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/johnendz/Firebase-Photography-Example?color=yellow">
   </a>
 
   <a href="https://github.com/johnendz/Firebase-Photography-Example/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/johnendz/Firebase-Photography-Example">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/johnendz/Firebase-Photography-Example?color=yellow">
   </a>
 
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-yellow">
 </p>
 
 <p align="center">
